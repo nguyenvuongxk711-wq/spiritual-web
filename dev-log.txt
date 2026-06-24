@@ -1489,3 +1489,22 @@ TypeError: e[o] is not a function
 <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 
 'C:\Users\Admin\CascadeProjects\spiritual-web\.next\cache\webpack\client-development\0.pack.gz_' -> 
 'C:\Users\Admin\CascadeProjects\spiritual-web\.next\cache\webpack\client-development\0.pack.gz'
+Watchpack Error (stats): Error: EINVAL: invalid argument, lstat 'C:\pagefile.sys'
+Watchpack Error (stats): Error: EINVAL: invalid argument, lstat 'C:\pagefile.sys'
+Watchpack Error (stats): Error: EINVAL: invalid argument, lstat 'C:\pagefile.sys'
+ Γ£ô Compiled in 427ms (905 modules)
+ Γ£ô Compiled in 166ms (905 modules)
+ Γ£ô Compiled in 260ms (905 modules)
+ Γ£ô Compiled in 199ms (905 modules)
+ Γ£ô Compiled in 209ms (905 modules)
+ Γ£ô Compiled in 560ms (1670 modules)
+ ΓÜá Found a change in next.config.js. Restarting the server to apply the changes...
+   Γû▓ Next.js 15.1.0
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.121:3000
+
+ Γ£ô Starting...
+ ΓÜá Invalid next.config.js options detected: 
+ ΓÜá     Unrecognized key(s) in object: 'swcMinify'
+ ΓÜá See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ Γ£ô Ready in 1993ms

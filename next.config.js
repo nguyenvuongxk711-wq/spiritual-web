@@ -5,6 +5,9 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  // Disable server-side features for static export
+  reactStrictMode: true,
+  swcMinify: true,
 };
 
 module.exports = nextConfig;

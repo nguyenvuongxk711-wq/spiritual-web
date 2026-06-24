@@ -1,0 +1,9 @@
+backend/
+scripts/
+*.md
+*.log
+dev-log.txt
+start-log.txt
+.env
+.env.local
+.env.example

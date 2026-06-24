@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: tamlinh-postgres
+    environment:
+      POSTGRES_USER: tamlinh
+      POSTGRES_PASSWORD: tamlinh123
+      POSTGRES_DB: tamlinh_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - tamlinh-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: tamlinh-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - tamlinh-net
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tamlinh-api
+    environment:
+      DATABASE_URL: postgresql+asyncpg://tamlinh:tamlinh123@postgres:5432/tamlinh_db
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      AI_API_KEY: ${AI_API_KEY}
+      AI_PROVIDER: ${AI_PROVIDER:-gemini}
+      AI_MODEL: ${AI_MODEL:-gemini-1.5-pro}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - tamlinh-net
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker
+    container_name: tamlinh-worker
+    environment:
+      DATABASE_URL: postgresql+asyncpg://tamlinh:tamlinh123@postgres:5432/tamlinh_db
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      AI_API_KEY: ${AI_API_KEY}
+      AI_PROVIDER: ${AI_PROVIDER:-gemini}
+      AI_MODEL: ${AI_MODEL:-gemini-1.5-pro}
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - tamlinh-net
+    volumes:
+      - ./backend:/app
+    command: celery -A app.celery_app worker --loglevel=info --concurrency=1
+
+volumes:
+  postgres_data:
+
+networks:
+  tamlinh-net:
+    driver: bridge

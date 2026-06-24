@@ -1,0 +1,16 @@
+﻿node.exe :  Γ¿» Failed to start server
+At line:1 char:68
++ ... itual-web"; & "C:\Program Files\nodejs\node.exe" "node_modules\next\d ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( Γ¿» Failed to start server:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Error: listen EADDRINUSE: address already in use :::3000
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::3000)
+    at new Promise (<anonymous>) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}

@@ -1508,3 +1508,4 @@ Watchpack Error (stats): Error: EINVAL: invalid argument, lstat 'C:\pagefile.sys
  ΓÜá     Unrecognized key(s) in object: 'swcMinify'
  ΓÜá See more info here: https://nextjs.org/docs/messages/invalid-next-config
  Γ£ô Ready in 1993ms
+   Reload env: .env.local

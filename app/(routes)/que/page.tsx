@@ -14,6 +14,11 @@ export default function QuePage() {
   const [astroError, setAstroError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Skip API call on production (Vercel)
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      setAstroError("Chức năng này cần backend chạy local. Vui lòng chạy backend để xem dữ liệu kho.");
+      return;
+    }
     const keywords = ["Kinh Dịch", "Gieo quẻ", "Huyền sấm", "Tam giáo", "Tâm linh"];
     Promise.all(
       keywords.map(async (k) => {

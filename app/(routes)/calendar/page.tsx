@@ -62,6 +62,11 @@ export default function CalendarPage() {
   const [astroError, setAstroError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Skip API call on production (Vercel)
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      setAstroError("Chức năng này cần backend chạy local. Vui lòng chạy backend để xem dữ liệu kho.");
+      return;
+    }
     const keywords = ["Lịch vạn niên", "Xem ngày tốt xấu", "Đổi ngày âm dương", "Giờ hoàng đạo", "Thần 12"];
     Promise.all(
       keywords.map(async (k) => {

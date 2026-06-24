@@ -14,6 +14,11 @@ export default function PhongThuyPage() {
   const [astroError, setAstroError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Skip API call on production (Vercel)
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      setAstroError("Chức năng này cần backend chạy local. Vui lòng chạy backend để xem dữ liệu kho.");
+      return;
+    }
     const keywords = ["Phong thủy", "Hướng nhà", "Bát trạch", "Thước lỗ ban", "Kim Lâu", "Tam Tai"];
     Promise.all(
       keywords.map(async (k) => {

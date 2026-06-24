@@ -92,6 +92,11 @@ export default function SimPage() {
   const reduced = useReducedMotion();
 
   useEffect(() => {
+    // Skip API call on production (Vercel)
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      setAstroError("Chức năng này cần backend chạy local. Vui lòng chạy backend để xem dữ liệu kho.");
+      return;
+    }
     const keywords = ["Sim phong thủy", "Xem sim", "Số đẹp", "Số tài lộc", "Phong thủy số"];
     Promise.all(
       keywords.map(async (k) => {

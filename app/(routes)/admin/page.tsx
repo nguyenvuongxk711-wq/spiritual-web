@@ -74,6 +74,10 @@ export default function AdminPage() {
   }, []);
 
   const fetchTasks = useCallback(async () => {
+    // Skip API call on production (Vercel)
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      return;
+    }
     try {
       const r = await fetch(`${API_BASE}/api/scrape-tasks`);
       const items = await r.json();
@@ -84,6 +88,10 @@ export default function AdminPage() {
   }, [addLog]);
 
   const fetchData = useCallback(async () => {
+    // Skip API call on production (Vercel)
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      return;
+    }
     try {
       const r = await fetch(`${API_BASE}/api/astrology-data`);
       const items = await r.json();
@@ -94,6 +102,10 @@ export default function AdminPage() {
   }, [addLog]);
 
   const fetchSources = useCallback(async () => {
+    // Skip API call on production (Vercel)
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      return;
+    }
     try {
       const r = await fetch(`${API_BASE}/api/sources`);
       const items = await r.json();
